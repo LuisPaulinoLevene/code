@@ -8,14 +8,578 @@
 
 <title>Network Unlock by IMEI</title>
 
-<link rel="stylesheet" href="style.css">
-
 </head>
-
 
 <body>
 
+<style>
+*{
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
 
+
+body{
+
+margin:0;
+
+background:#f1f5f9;
+
+color:#111827;
+
+}
+
+
+
+/* ================= HEADER ================= */
+
+
+header{
+
+background:linear-gradient(
+135deg,
+#111827,
+#1e3a8a
+);
+
+color:white;
+
+padding:18px 30px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+position:relative;
+
+box-shadow:0 5px 15px #0004;
+
+}
+
+
+
+.logo{
+
+font-size:24px;
+
+font-weight:bold;
+
+}
+
+
+
+/* MENUS */
+
+
+#menuLogin,
+#menuUsuario{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+}
+
+
+
+#emailTopo{
+
+font-weight:bold;
+
+color:#93c5fd;
+
+}
+
+
+
+#saldoTopo{
+
+color:#22c55e;
+
+font-size:18px;
+
+}
+
+
+
+
+
+button{
+
+background:#2563eb;
+
+color:white;
+
+border:0;
+
+padding:10px 16px;
+
+border-radius:10px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+transition:.3s;
+
+}
+
+
+
+button:hover{
+
+transform:translateY(-2px);
+
+opacity:.9;
+
+}
+
+
+
+.hidden{
+
+display:none!important;
+
+}
+
+
+
+/* ================= CONTAINER ================= */
+
+
+main{
+
+width:90%;
+
+max-width:700px;
+
+margin:35px auto;
+
+}
+
+
+
+/* ================= CARD CALCULO ================= */
+
+
+.card{
+
+background:white;
+
+padding:30px;
+
+border-radius:20px;
+
+box-shadow:0 8px 25px #0002;
+
+}
+
+
+
+.card h2{
+
+text-align:center;
+
+color:#1e3a8a;
+
+margin-top:0;
+
+}
+
+
+
+label{
+
+font-weight:bold;
+
+display:block;
+
+margin-top:10px;
+
+}
+
+
+
+input,
+select{
+
+width:100%;
+
+padding:14px;
+
+margin-top:8px;
+
+margin-bottom:18px;
+
+border:1px solid #cbd5e1;
+
+border-radius:10px;
+
+font-size:15px;
+
+}
+
+
+
+input:focus,
+select:focus{
+
+outline:none;
+
+border-color:#2563eb;
+
+}
+
+
+
+/* BOTAO PRINCIPAL */
+
+
+.primary{
+
+width:100%;
+
+background:#2563eb;
+
+padding:15px;
+
+font-size:16px;
+
+}
+
+
+
+.green{
+
+background:#16a34a;
+
+}
+
+
+
+
+
+/* ================= MODAIS ================= */
+
+
+.modal{
+
+position:absolute;
+
+top:75px;
+
+right:25px;
+
+width:300px;
+
+background:white;
+
+color:#111827;
+
+padding:25px;
+
+border-radius:18px;
+
+box-shadow:0 10px 30px #0005;
+
+z-index:1000;
+
+}
+
+
+
+.modal h3{
+
+text-align:center;
+
+}
+
+
+
+.fechar{
+
+float:right;
+
+font-size:22px;
+
+color:red;
+
+cursor:pointer;
+
+}
+
+
+
+
+
+/* ================= MENSAGEM ================= */
+
+
+.message{
+
+background:#dbeafe;
+
+color:#1e3a8a;
+
+padding:15px;
+
+border-radius:12px;
+
+margin-bottom:20px;
+
+}
+
+
+
+/* ================= RESULTADO ================= */
+
+
+.resultado-area{
+
+margin-top:30px;
+
+background:
+
+linear-gradient(
+135deg,
+#0f172a,
+#2563eb
+);
+
+padding:35px;
+
+border-radius:22px;
+
+text-align:center;
+
+color:white;
+
+box-shadow:0 10px 30px #0004;
+
+}
+
+
+
+.resultado-area h2{
+
+color:#bfdbfe;
+
+margin-top:0;
+
+}
+
+
+
+.codigo-final{
+
+background:white;
+
+color:#16a34a;
+
+font-size:42px;
+
+font-weight:bold;
+
+letter-spacing:8px;
+
+padding:25px;
+
+border-radius:15px;
+
+margin:25px auto;
+
+max-width:450px;
+
+border:3px solid #22c55e;
+
+box-shadow:0 5px 20px #0004;
+
+}
+
+
+
+.saldo-final{
+
+font-size:20px;
+
+color:#fde047;
+
+font-weight:bold;
+
+}
+
+
+
+/* ================= SUPORTE ================= */
+
+
+#btnSuporte{
+
+position:fixed;
+
+right:25px;
+
+bottom:70px;
+
+width:60px;
+
+height:60px;
+
+border-radius:50%;
+
+background:#16a34a;
+
+font-size:28px;
+
+box-shadow:0 8px 20px #0005;
+
+z-index:2000;
+
+}
+
+
+
+.suporte{
+
+position:fixed;
+
+right:25px;
+
+bottom:145px;
+
+width:270px;
+
+background:white;
+
+padding:20px;
+
+border-radius:18px;
+
+box-shadow:0 10px 35px #0005;
+
+z-index:2000;
+
+}
+
+
+
+.suporte h3{
+
+color:#2563eb;
+
+text-align:center;
+
+}
+
+
+
+.suporte a{
+
+display:block;
+
+background:#16a34a;
+
+color:white;
+
+padding:12px;
+
+border-radius:10px;
+
+text-decoration:none;
+
+text-align:center;
+
+margin-top:15px;
+
+}
+
+
+
+/* ================= FOOTER ================= */
+
+
+footer{
+
+position:fixed;
+
+right:20px;
+
+bottom:15px;
+
+background:#111827;
+
+color:white;
+
+padding:8px 15px;
+
+border-radius:10px;
+
+font-size:13px;
+
+}
+
+
+
+/* ================= RESPONSIVO ================= */
+
+
+@media(max-width:650px){
+
+
+header{
+
+flex-direction:column;
+
+gap:15px;
+
+}
+
+
+
+#menuLogin,
+#menuUsuario{
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+}
+
+
+
+.logo{
+
+font-size:20px;
+
+}
+
+
+
+.codigo-final{
+
+font-size:28px;
+
+letter-spacing:4px;
+
+}
+
+
+
+footer{
+
+font-size:11px;
+
+right:10px;
+
+}
+
+
+}
+</style>
 <header>
 
 
@@ -470,9 +1034,848 @@ Todos direitos reservados.
 
 
 
+<script>
+const API =
+    window.location.hostname === "localhost"
+        ? "http://localhost:8000"
+        : "/api";
+
+let usuario=null;
 
 
-<script src="script.js"></script>
+// ================= MENSAGEM =================
+
+function mensagem(texto){
+
+let box=document.getElementById("msg");
+
+if(box)
+
+box.innerHTML=`
+<div class="message">
+${texto}
+</div>`;
+
+}
+
+
+
+// ================= MODAIS =================
+
+function abrirCadastro(){
+
+fecharModais();
+
+document
+.getElementById("modalCadastro")
+?.classList.remove("hidden");
+
+}
+
+
+
+function abrirLogin(){
+
+fecharModais();
+
+document
+.getElementById("modalLogin")
+?.classList.remove("hidden");
+
+}
+
+
+
+function abrirDeposito(){
+
+fecharModais();
+
+document
+.getElementById("modalDeposito")
+?.classList.remove("hidden");
+
+}
+
+
+
+function fecharModais(){
+
+[
+"modalCadastro",
+"modalLogin",
+"modalDeposito"
+].forEach(id=>{
+
+document
+.getElementById(id)
+?.classList.add("hidden");
+
+});
+
+}
+
+
+
+// ================= SUPORTE =================
+
+
+function abrirSuporte(){
+
+document
+.getElementById("modalSuporte")
+?.classList.remove("hidden");
+
+}
+
+
+
+function fecharSuporte(){
+
+document
+.getElementById("modalSuporte")
+?.classList.add("hidden");
+
+}
+
+
+
+// ================= CADASTRO =================
+
+
+async function cadastrar(){
+
+let dados={
+
+email:cadEmail.value,
+
+senha:cadSenha.value
+
+};
+
+
+try{
+
+
+let resposta=await fetch(
+`${API}/usuarios/`,
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify(dados)
+
+});
+
+
+let retorno=await resposta.json();
+
+
+if(resposta.ok){
+
+mensagem(
+"Cadastro realizado. Faça login."
+);
+
+fecharModais();
+
+}
+
+else{
+
+mensagem(
+retorno.detail || "Erro no cadastro"
+);
+
+}
+
+
+}catch(e){
+
+mensagem(
+"Servidor indisponível"
+);
+
+}
+
+
+}
+
+
+
+// ================= LOGIN =================
+
+
+async function login(){
+
+
+let dados={
+
+email:logEmail.value,
+
+senha:logSenha.value
+
+};
+
+
+try{
+
+
+let resposta=await fetch(
+`${API}/usuarios/login`,
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify(dados)
+
+});
+
+
+let retorno=await resposta.json();
+
+
+
+if(!resposta.ok){
+
+mensagem(
+retorno.detail ||
+"Erro no login"
+);
+
+return;
+
+}
+
+
+
+usuario=retorno;
+
+
+localStorage.setItem(
+"usuario_id",
+usuario.id
+);
+
+
+
+mostrarMenuUsuario();
+
+
+mensagem(
+"Login efetuado com sucesso"
+);
+
+
+fecharModais();
+
+
+
+}catch(e){
+
+mensagem(
+"Erro de ligação ao servidor"
+);
+
+}
+
+
+}
+
+
+
+
+
+// ================= MENU USUARIO =================
+
+
+function mostrarMenuUsuario(){
+
+
+menuLogin.classList.add("hidden");
+
+
+menuUsuario.classList.remove("hidden");
+
+
+
+emailTopo.innerHTML=
+"👤 "+usuario.email;
+
+
+
+buscarSaldo();
+
+
+}
+
+
+
+// ================= SAIR =================
+
+
+function sair(){
+
+localStorage.removeItem(
+"usuario_id"
+);
+
+
+location.reload();
+
+}
+
+
+
+// ================= SALDO =================
+
+
+async function buscarSaldo(){
+
+
+let id=
+localStorage.getItem("usuario_id");
+
+
+if(!id)return;
+
+
+
+try{
+
+
+let resposta=await fetch(
+`${API}/calcular/saldo/${id}`
+);
+
+
+
+let dados=await resposta.json();
+
+
+
+if(resposta.ok){
+
+
+let saldo=document.getElementById(
+"saldoTopo"
+);
+
+
+if(saldo)
+
+saldo.innerHTML=dados.saldo;
+
+
+}
+
+
+
+}catch(e){
+
+console.log(e);
+
+}
+
+
+}
+
+
+
+
+
+// ================= MARCAS =================
+
+
+async function carregarMarcas(){
+
+
+try{
+
+
+let resposta=await fetch(
+`${API}/calcular/marcas`
+);
+
+
+
+let marcas=await resposta.json();
+
+
+
+let select=document.getElementById(
+"marca"
+);
+
+
+
+select.innerHTML=`
+
+<option value="">
+Selecione marca
+</option>
+
+`;
+
+
+
+marcas.forEach(m=>{
+
+
+select.innerHTML+=`
+
+<option value="${m.id}">
+${m.marca}
+</option>
+
+`;
+
+
+});
+
+
+
+}catch(e){
+
+
+mensagem(
+"Erro ao carregar marcas"
+);
+
+
+}
+
+
+}
+
+
+
+
+
+// ================= MODELOS =================
+
+
+document
+.getElementById("marca")
+.addEventListener(
+"change",
+async function(){
+
+
+let id=this.value;
+
+
+if(!id)return;
+
+
+
+try{
+
+
+let resposta=await fetch(
+`${API}/calcular/modelos/${id}`
+);
+
+
+
+let modelos=await resposta.json();
+
+
+
+modelo.innerHTML=`
+
+<option value="">
+Selecione modelo
+</option>
+
+`;
+
+
+
+modelos.forEach(m=>{
+
+
+modelo.innerHTML+=`
+
+<option value="${m.id}">
+${m.modelo}
+</option>
+
+`;
+
+
+});
+
+
+
+}catch(e){
+
+mensagem(
+"Erro ao carregar modelos"
+);
+
+}
+
+
+});
+
+
+
+
+
+
+
+// ================= CALCULAR =================
+
+
+async function calcular(){
+
+
+let id=
+localStorage.getItem("usuario_id");
+
+
+
+if(!id){
+
+mensagem(
+"Faça login primeiro."
+);
+
+return;
+
+}
+
+
+
+
+let dados={
+
+usuario_id:Number(id),
+
+imei:
+imei.value.trim(),
+
+marca_id:Number(
+marca.value
+),
+
+modelo_id:Number(
+modelo.value
+)
+
+};
+
+
+
+
+if(dados.imei.length!==15){
+
+mensagem(
+"IMEI deve ter 15 números."
+);
+
+return;
+
+}
+
+
+
+try{
+
+
+let resposta=await fetch(
+`${API}/calcular/`,
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:
+JSON.stringify(dados)
+
+});
+
+
+
+let retorno=await resposta.json();
+
+
+
+if(resposta.ok){
+
+
+resultado.innerHTML=`
+
+<div class="codigo-final">
+
+${retorno.codigo}
+
+</div>
+
+`;
+
+
+
+buscarSaldo();
+
+
+}
+
+else{
+
+
+mensagem(
+retorno.detail ||
+"Erro ao calcular"
+);
+
+
+}
+
+
+
+}catch(e){
+
+
+mensagem(
+"Erro no servidor"
+);
+
+
+}
+
+
+
+}
+
+
+
+
+
+// ================= DEPOSITO =================
+
+
+async function recarregar(){
+
+
+
+let id=
+localStorage.getItem("usuario_id");
+
+
+
+if(!id){
+
+mensagem(
+"Faça login primeiro."
+);
+
+return;
+
+}
+
+
+
+
+let dados={
+
+
+usuario_id:Number(id),
+
+
+valor:Number(
+valor.value
+),
+
+
+numero:
+numero.value,
+
+
+metodo:
+metodo.value
+
+
+};
+
+
+
+
+if(!dados.valor){
+
+mensagem(
+"Digite o valor."
+);
+
+return;
+
+}
+
+
+
+try{
+
+
+let resposta=await fetch(
+`${API}/calcular/recarga`,
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:
+JSON.stringify(dados)
+
+});
+
+
+
+let retorno=await resposta.json();
+
+
+
+if(resposta.ok){
+
+
+mensagem(
+"Depósito confirmado."
+);
+
+
+
+buscarSaldo();
+
+
+fecharModais();
+
+
+}
+
+else{
+
+
+mensagem(
+retorno.detail ||
+"Erro no depósito"
+);
+
+
+}
+
+
+
+}catch(e){
+
+
+mensagem(
+"Erro de ligação."
+);
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+// ================= RECUPERAR LOGIN =================
+
+
+async function verificarLogin(){
+
+
+let id=
+localStorage.getItem("usuario_id");
+
+
+
+if(!id)return;
+
+
+
+try{
+
+
+let resposta=await fetch(
+`${API}/usuarios/${id}`
+);
+
+
+
+if(resposta.ok){
+
+
+usuario=
+await resposta.json();
+
+
+
+mostrarMenuUsuario();
+
+
+}
+
+
+
+}catch(e){
+
+console.log(e);
+
+}
+
+
+}
+
+
+
+
+
+
+
+// ================= ANO =================
+
+
+let ano=document.getElementById("ano");
+
+
+if(ano)
+
+ano.innerHTML=
+new Date().getFullYear();
+
+
+
+
+
+
+
+// ================= INICIO =================
+
+
+carregarMarcas();
+
+verificarLogin();
+</script>
 
 
 </body>
