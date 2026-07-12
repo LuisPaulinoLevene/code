@@ -1,7 +1,7 @@
 from decouple import config
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base, Session
+from sqlalchemy.orm import sessionmaker, declarative_base
 
 
 DATABASE_URL = config("DATABASE_URL")
@@ -42,12 +42,18 @@ Base = declarative_base()
 
 
 
+# ==========================
+# DEPENDÊNCIA DO BANCO
+# ==========================
+
 def get_db():
 
     db = SessionLocal()
 
     try:
+
         yield db
 
     finally:
+
         db.close()
