@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProemPy Services</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(
+                135deg,
+                #1d4ed8 0%,
+                #2563eb 40%,
+                #16a34a 100%
+            );
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            color: white;
+        }
+
+        .container {
+            width: 380px;
+            background: white;
+            color: #333;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #666;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .tabs button {
+            width: 50%;
+            padding: 12px;
+            border: none;
+            cursor: pointer;
+            background: #e5e7eb;
+            font-size: 16px;
+        }
+
+        .tabs button.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        form {
+            display: none;
+        }
+
+        form.active {
+            display: block;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        button.submit {
+            width: 100%;
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button.submit:hover {
+            background: #1d4ed8;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 15px;
+            text-align: center;
+            font-size: 14px;
+            color: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Unlock Code</h1>
+
+    <div class="tabs">
+        <button id="loginTab" class="active" onclick="mostrarLogin()">
+            Login
+        </button>
+
+        <button id="signupTab" onclick="mostrarSignup()">
+            Cadastro
+        </button>
+    </div>
+
+
+    <!-- Login -->
+    <form id="loginForm" class="active">
+
+        <input
+            type="email"
+            placeholder="Email"
+            required
+        >
+
+        <input
+            type="password"
+            placeholder="Senha"
+            required
+        >
+
+        <button class="submit">
+            Entrar
+        </button>
+
+    </form>
+
+
+    <!-- Cadastro -->
+    <form id="signupForm">
+
+        <input
+            type="email"
+            placeholder="Email"
+            required
+        >
+
+        <input
+            type="password"
+            placeholder="Senha"
+            required
+        >
+
+        <input
+            type="password"
+            placeholder="Confirmar senha"
+            required
+        >
+
+        <button class="submit">
+            Criar conta
+        </button>
+
+    </form>
+
+</div>
+
+
+<footer>
+    © <span id="ano"></span> ProemPy Services. Todos os direitos reservados.
+</footer>
+
+
+<script>
+
+    function mostrarLogin() {
+        document.getElementById("loginForm").classList.add("active");
+        document.getElementById("signupForm").classList.remove("active");
+
+        document.getElementById("loginTab").classList.add("active");
+        document.getElementById("signupTab").classList.remove("active");
+    }
+
+
+    function mostrarSignup() {
+        document.getElementById("signupForm").classList.add("active");
+        document.getElementById("loginForm").classList.remove("active");
+
+        document.getElementById("signupTab").classList.add("active");
+        document.getElementById("loginTab").classList.remove("active");
+    }
+
+
+    // Ano automático
+    document.getElementById("ano").textContent = new Date().getFullYear();
+
+</script>
+
+</body>
+</html>

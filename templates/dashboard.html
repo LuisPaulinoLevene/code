@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Network Unlock by IMEI</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+
+<div class="logo">
+Network Unlock by IMEI
+</div>
+
+
+
+<div id="menuLogin">
+
+
+<button onclick="abrirCadastro()">
+👤 Signup
+</button>
+
+
+<button onclick="abrirLogin()">
+🔑 Login
+</button>
+
+
+</div>
+
+
+
+
+
+<div id="menuUsuario" class="hidden">
+
+
+<span id="emailTopo"></span>
+
+
+<span>
+💰 <b id="saldoTopo">0</b> MT
+</span>
+
+
+
+<button onclick="abrirDeposito()">
+💳 Depositar
+</button>
+
+
+<button onclick="sair()">
+🚪 Sair
+</button>
+
+
+</div>
+
+
+</header>
+
+
+
+
+
+
+
+<!-- MODAL CADASTRO -->
+
+
+<div id="modalCadastro" class="modal hidden">
+
+
+<span class="fechar" onclick="fecharModais()">
+×
+</span>
+
+
+<h3>
+Cadastrar
+</h3>
+
+
+<input
+id="cadEmail"
+placeholder="Email">
+
+
+
+<input
+id="cadSenha"
+type="password"
+placeholder="Senha">
+
+
+
+<button class="primary" onclick="cadastrar()">
+
+Cadastrar
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- MODAL LOGIN -->
+
+
+<div id="modalLogin" class="modal hidden">
+
+
+<span class="fechar" onclick="fecharModais()">
+×
+</span>
+
+
+<h3>
+Login
+</h3>
+
+
+
+<input
+id="logEmail"
+placeholder="Email">
+
+
+
+<input
+id="logSenha"
+type="password"
+placeholder="Senha">
+
+
+
+<button class="primary" onclick="login()">
+
+Entrar
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- MODAL DEPOSITO -->
+
+
+<div id="modalDeposito" class="modal hidden">
+
+
+<span class="fechar" onclick="fecharModais()">
+
+×
+
+</span>
+
+
+
+<h3>
+Depositar saldo
+</h3>
+
+
+
+<select id="metodo">
+
+
+<option value="emola">
+eMola
+</option>
+
+
+<option value="mpesa">
+M-Pesa
+</option>
+
+
+</select>
+
+
+
+
+<input
+id="numero"
+placeholder="Número">
+
+
+<input
+id="valor"
+type="number"
+placeholder="Valor">
+
+
+
+<button
+class="primary green"
+onclick="recarregar()">
+
+Confirmar
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<main>
+
+
+<div id="msg"></div>
+
+
+
+
+
+<!-- AREA CALCULO -->
+
+
+<div class="card">
+
+
+<h2>
+Calcular Código
+</h2>
+
+
+
+
+<label>
+Marca
+</label>
+
+
+<select id="marca">
+
+<option>
+Selecione marca
+</option>
+
+</select>
+
+
+
+
+
+
+<label>
+Modelo
+</label>
+
+
+<select id="modelo">
+
+<option>
+Selecione modelo
+</option>
+
+</select>
+
+
+
+
+
+
+<label>
+IMEI
+</label>
+
+
+<input
+id="imei"
+maxlength="15"
+placeholder="Digite IMEI com 15 números">
+
+
+
+
+
+
+<button
+class="primary"
+onclick="calcular()">
+
+Calcular Código
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- AREA RESULTADO SEPARADA -->
+
+
+<div class="resultado-area">
+
+
+<h2>
+</h2>
+
+
+<div id="resultado">
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+</main>
+
+
+
+
+
+
+
+
+
+<!-- BOTAO SUPORTE -->
+
+
+<button
+id="btnSuporte"
+onclick="abrirSuporte()">
+
+💬
+
+</button>
+
+
+
+
+
+
+
+
+<!-- JANELA SUPORTE -->
+
+
+<div id="modalSuporte" class="suporte hidden">
+
+
+<span
+class="fechar"
+onclick="fecharSuporte()">
+
+×
+
+</span>
+
+
+
+<h3>
+Suporte
+</h3>
+
+
+
+<p>
+
+<b>
+Luís Paulino Levene Máquina
+</b>
+
+</p>
+
+
+
+
+<p>
+
+Contactos:
+
+<br>
+
+863614176
+
+<br>
+
+850320411
+
+</p>
+
+
+
+
+
+<a
+href="https://wa.me/258863614176"
+target="_blank">
+
+📱 Falar no WhatsApp
+
+</a>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- RODAPE -->
+
+
+<footer>
+
+© <span id="ano"></span>
+
+ProemPy Services.
+
+Todos direitos reservados.
+
+</footer>
+
+
+
+
+
+
+
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+
+</html>
