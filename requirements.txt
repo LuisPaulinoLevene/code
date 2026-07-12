@@ -1,7 +1,8 @@
 fastapi
 uvicorn[standard]
-pydantic[email]
 sqlalchemy
-requests
+pydantic[email]
 python-decouple
+requests
 psycopg2-binary
+jinja2
