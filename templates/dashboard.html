@@ -579,6 +579,180 @@ right:10px;
 
 
 }
+
+/* ================= POPUP RESULTADO ================= */
+
+
+.popup-resultado{
+
+position:fixed;
+
+top:90px;
+
+right:25px;
+
+width:280px;
+
+background:white;
+
+padding:25px;
+
+border-radius:18px;
+
+box-shadow:0 10px 35px #0005;
+
+z-index:3000;
+
+animation:entrada .3s ease;
+
+text-align:center;
+
+border-left:6px solid #16a34a;
+
+}
+
+
+.popup-resultado h3{
+
+margin-top:0;
+
+color:#1e3a8a;
+
+}
+
+
+
+.codigo-popup{
+
+font-size:35px;
+
+font-weight:bold;
+
+letter-spacing:6px;
+
+color:#16a34a;
+
+}
+
+
+
+#codigoPopup{
+
+font-size:40px;
+
+font-weight:bold;
+
+letter-spacing:8px;
+
+color:#16a34a;
+
+padding:15px;
+
+background:#f0fdf4;
+
+border-radius:12px;
+
+}
+
+
+
+@keyframes entrada{
+
+from{
+
+transform:translateX(100px);
+
+opacity:0;
+
+}
+
+to{
+
+transform:translateX(0);
+
+opacity:1;
+
+}
+
+}
+
+
+
+@media(max-width:650px){
+
+.popup-resultado{
+
+right:10px;
+
+left:10px;
+
+width:auto;
+
+}
+
+}
+
+/* ================= ADMIN ================= */
+
+
+#btnAdmin{
+
+position:fixed;
+
+left:25px;
+
+bottom:25px;
+
+width:60px;
+
+height:60px;
+
+border-radius:50%;
+
+background:#111827;
+
+font-size:28px;
+
+box-shadow:0 8px 20px #0005;
+
+z-index:3000;
+
+}
+
+
+
+.popup-admin{
+
+position:fixed;
+
+left:25px;
+
+bottom:100px;
+
+width:280px;
+
+background:white;
+
+padding:25px;
+
+border-radius:18px;
+
+box-shadow:0 10px 35px #0005;
+
+z-index:3000;
+
+}
+
+
+
+.popup-admin h3{
+
+text-align:center;
+
+color:#1e3a8a;
+
+}
+
 </style>
 <header>
 
@@ -886,36 +1060,20 @@ Calcular Código
 
 </div>
 
+<!-- POPUP RESULTADO -->
+<div id="popupResultado" class="popup-resultado hidden">
 
+<span onclick="fecharResultado()" class="fechar">
+×
+</span>
 
+<h3>
+O teu código é:
+</h3>
 
-
-
-
-
-
-<!-- AREA RESULTADO SEPARADA -->
-
-
-<div class="resultado-area">
-
-
-<h2>
-</h2>
-
-
-<div id="resultado">
-
+<div id="codigoPopup"></div>
 
 </div>
-
-
-</div>
-
-
-
-
-
 </main>
 
 
@@ -1003,18 +1161,62 @@ target="_blank">
 
 </a>
 
-
-
 </div>
 
 
+<!-- BOTÃO ADMIN -->
+
+<button
+id="btnAdmin"
+onclick="abrirAdmin()">
+
+🔐
+
+</button>
 
 
 
+<!-- POPUP LOGIN ADMIN -->
+
+<div id="popupAdmin" class="popup-admin hidden">
+
+
+<span
+class="fechar"
+onclick="fecharAdmin()">
+
+×
+</span>
+
+
+<h3>
+Admin
+</h3>
 
 
 
+<input
+id="adminEmail"
+placeholder="Email">
 
+
+
+<input
+id="adminSenha"
+type="password"
+placeholder="Senha">
+
+
+
+<button
+class="primary"
+onclick="loginAdmin()">
+
+Entrar
+
+</button>
+
+</div>
 <!-- RODAPE -->
 
 
@@ -1027,12 +1229,6 @@ ProemPy Services.
 Todos direitos reservados.
 
 </footer>
-
-
-
-
-
-
 
 <script>
 const API =
@@ -1615,15 +1811,9 @@ let retorno=await resposta.json();
 if(resposta.ok){
 
 
-resultado.innerHTML=`
-
-<div class="codigo-final">
-
-${retorno.codigo}
-
-</div>
-
-`;
+mostrarResultado(
+retorno.codigo
+);
 
 
 
@@ -1847,9 +2037,136 @@ console.log(e);
 }
 
 
+function mostrarResultado(codigo){
+
+let popup=document.getElementById(
+"popupResultado"
+);
+
+
+let campo=document.getElementById(
+"codigoPopup"
+);
+
+
+campo.innerHTML=codigo;
+
+
+popup.classList.remove(
+"hidden"
+);
+
+}
 
 
 
+function fecharResultado(){
+
+document
+.getElementById("popupResultado")
+.classList.add("hidden");
+
+}
+
+// ================= ADMIN LOGIN =================
+
+
+function abrirAdmin(){
+
+document
+.getElementById("popupAdmin")
+.classList.remove("hidden");
+
+}
+
+
+
+function fecharAdmin(){
+
+document
+.getElementById("popupAdmin")
+.classList.add("hidden");
+
+}
+
+
+
+
+async function loginAdmin(){
+
+
+let dados={
+
+email:
+adminEmail.value,
+
+senha:
+adminSenha.value
+
+};
+
+
+
+try{
+
+
+let resposta = await fetch(
+`${API}/admins/login`,
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:
+JSON.stringify(dados)
+
+}
+
+);
+
+
+
+let retorno =
+await resposta.json();
+
+
+
+if(resposta.ok){
+
+
+window.location.href="/x/";
+
+
+}
+
+else{
+
+
+mensagem(
+retorno.detail ||
+"Dados inválidos"
+);
+
+
+}
+
+
+
+}catch(e){
+
+
+mensagem(
+"Erro de ligação ao servidor"
+);
+
+
+}
+
+
+}
 
 
 // ================= ANO =================
@@ -1876,8 +2193,6 @@ carregarMarcas();
 
 verificarLogin();
 </script>
-
-
 </body>
 
 

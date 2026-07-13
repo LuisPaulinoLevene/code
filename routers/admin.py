@@ -18,6 +18,43 @@ router = APIRouter(
 
 
 # ==========================
+# LOGIN ADMIN
+# ==========================
+
+@router.post("/login")
+def login_admin(
+    data: AdminCreate,
+    db: Session = Depends(get_db)
+):
+
+    admin = (
+        db.query(Admin)
+        .filter(
+            Admin.email == data.email,
+            Admin.senha == data.senha
+        )
+        .first()
+    )
+
+
+    if not admin:
+
+        raise HTTPException(
+            status_code=401,
+            detail="Email ou senha incorretos"
+        )
+
+
+    return {
+        "status": "success",
+        "admin_id": admin.id,
+        "email": admin.email
+    }
+
+
+
+
+# ==========================
 # CREATE
 # ==========================
 

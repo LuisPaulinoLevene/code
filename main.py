@@ -5,10 +5,12 @@ from database import engine, Base
 from routers.usuario import router as usuario_router
 from routers.admin import router as admin_router
 from routers.pages.unlock import router as pages_router
+from routers.pages import x
 from routers import marca
 from routers import modelo
 from routers import config
 from routers import calcular
+from routers import saldo
 
 # ==========================
 # AMBIENTE
@@ -46,6 +48,8 @@ app.include_router(calcular.router)
 app.include_router(marca.router)
 app.include_router(modelo.router)
 app.include_router(config.router)
+app.include_router(saldo.router)
+app.include_router(x.router)
 
 # ==========================
 # CRIAR TABELAS

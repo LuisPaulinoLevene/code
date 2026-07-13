@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Gestão</title>
+</head>
+<body>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f9;
+    color: #333;
+}
+header {
+    background: #1f4e79;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+header h1 {
+    font-size: 28px;
+}
+main {
+    width: 95%;
+    max-width: 1200px;
+    margin: 25px auto;
+}
+.card {
+    background: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+.card h2 {
+    margin-bottom: 20px;
+    color: #1f4e79;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+.form-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+label {
+    font-weight: bold;
+}
+input,
+select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    min-width: 180px;
+    font-size: 15px;
+}
+button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    background: #1f4e79;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+}
+button:hover {
+    opacity: 0.85;
+}
+button.secondary {
+    background: #777;
+}
+button.delete {
+    background: #c0392b;
+}
+button.edit {
+    background: #27ae60;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+table th {
+    background: #1f4e79;
+    color:white;
+    padding: 12px;
+    text-align: left;
+}
+table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+table tr:hover {
+    background: #f1f1f1;
+}
+.actions {
+    display:flex;
+    gap:8px;
+}
+
+.actions button {
+    padding: 7px 12px;
+    font-size:13px;
+}
+@media(max-width:700px){
+    main {
+        width: 98%;
+    }
+    .form-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    input,
+    select,
+    button {
+        width:100%;
+    }
+    table {
+        font-size:13px;
+    }
+}
+
+#btnGerenciarAdmin{
+
+position:fixed;
+
+left:25px;
+
+bottom:95px;
+
+width:60px;
+
+height:60px;
+
+border-radius:50%;
+
+background:#2563eb;
+
+font-size:28px;
+
+box-shadow:0 8px 20px #0005;
+
+z-index:3000;
+
+}
+
+
+
+.popup-admin{
+
+position:fixed;
+
+top:150px;
+
+left:100px;
+
+width:320px;
+
+background:white;
+
+padding:25px;
+
+border-radius:18px;
+
+box-shadow:0 10px 35px #0005;
+
+z-index:3000;
+
+cursor:default;
+
+}
+
+
+/* área usada para arrastar */
+
+.popup-header{
+
+cursor:move;
+
+user-select:none;
+
+font-weight:bold;
+
+margin-bottom:15px;
+
+}
+}
+
+
+
+.popup-admin h3{
+text-align:center;
+color:#1e3a8a;
+}
+.popup-admin hr{
+margin:20px 0;
+}
+.hidden{
+    display:none!important;
+}
+.fechar{
+float:right;
+font-size:24px;
+color:red;
+cursor:pointer;
+font-weight:bold;
+}
+.tabela-admin{
+width:100%;
+margin-top:15px;
+border-collapse:collapse;
+font-size:13px;
+}
+.tabela-admin th{
+background:#2563eb;
+color:white;
+padding:8px;
+}
+.tabela-admin td{
+padding:8px;
+border-bottom:1px solid #ddd;
+}
+.tabela-admin button{
+padding:5px 8px;
+font-size:12px;
+background:#dc2626;
+}
+
+.tabela-admin{
+width:100%;
+margin-top:15px;
+border-collapse:collapse;
+font-size:13px;
+}
+.tabela-admin th{
+background:#2563eb;
+color:white;
+padding:8px;
+}
+.tabela-admin td{
+padding:8px;
+border-bottom:1px solid #ddd;
+}
+.tabela-admin button{
+background:#dc2626;
+padding:5px 10px;
+font-size:12px;
+}
+</style>
+<header>
+    <h1>Painel de Gestão</h1>
+</header>
+<main>
+
+    <!-- =========================
+         CONFIGURAÇÃO
+    ========================== -->
+    <section class="card">
+        <h2>Configuração</h2>
+        <div class="form-group">
+            <label>
+                Preço do Código
+            </label>
+            <input
+                type="number"
+                id="preco_codigo"
+                placeholder="Digite o preço">
+            <button onclick="atualizarPreco()">
+                Atualizar
+            </button>
+        </div>
+    </section>
+
+    <!-- =========================
+         MARCAS
+    ========================== -->
+    <section class="card">
+        <h2>Cadastro de Marcas</h2>
+        <input
+            type="hidden"
+            id="marca_id">
+        <div class="form-group">
+            <label>
+                Nome da Marca
+            </label>
+            <input
+                type="text"
+                id="marca_nome"
+                placeholder="Ex: Itel">
+            <button onclick="salvarMarca()">
+                Salvar Marca
+            </button>
+            <button
+                class="secondary"
+                onclick="limparMarca()">
+                Limpar
+            </button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Marca</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="lista_marcas">
+            </tbody>
+        </table>
+    </section>
+
+    <!-- =========================
+         MODELOS
+    ========================== -->
+    <section class="card">
+        <h2>
+            Cadastro de Modelos
+        </h2>
+        <input
+            type="hidden"
+            id="modelo_id">
+        <div class="form-group">
+            <label>
+                Marca
+            </label>
+            <select id="modelo_marca">
+            </select>
+            <label>
+                Modelo
+            </label>
+            <input
+                type="text"
+                id="modelo_nome"
+                placeholder="Ex: A06">
+            <label>
+                Fórmula
+            </label>
+            <select id="modelo_formula">
+                <option value="">
+                    Selecionar fórmula
+                </option>
+                <option value="1">
+                    Fórmula 1
+                </option>
+                <option value="2">
+                    Fórmula 2
+                </option>
+                <option value="3">
+                    Fórmula 3
+                </option>
+            </select>
+            <button onclick="salvarModelo()">
+                Salvar Modelo
+            </button>
+            <button
+                class="secondary"
+                onclick="limparModelo()">
+                Limpar
+            </button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Fórmula</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="lista_modelos">
+            </tbody>
+        </table>
+    </section>
+
+    <!-- =========================
+          SALDOS
+    ========================== -->
+    <section class="card">
+        <h2>
+            Gestão de Saldo dos Usuários
+        </h2>
+        <div class="form-group">
+            <label>
+                Usuário
+            </label>
+            <select id="saldo_usuario">
+            </select>
+            <label>
+                Valor do Saldo
+            </label>
+            <input
+                type="number"
+                id="saldo_valor"
+                placeholder="Valor">
+            <button onclick="salvarSaldo()">
+                Adicionar Saldo
+            </button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Usuário</th>
+                    <th>Saldo</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="lista_saldos">
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<!-- BOTÃO GERENCIAR ADMINS -->
+
+<button
+id="btnGerenciarAdmin"
+onclick="abrirGerenciarAdmin()">
+
+⚙️
+
+</button>
+
+
+
+<!-- POPUP GERENCIAR ADMINS -->
+<div id="popupGerenciarAdmin" class="popup-admin hidden">
+<span
+class="fechar"
+onclick="fecharGerenciarAdmin()">
+×
+</span>
+<div class="popup-header">
+Gerenciar Admin
+</div>
+<h4>
+Cadastrar
+</h4>
+<input
+id="novoAdminEmail"
+placeholder="Email do admin">
+<input
+id="novoAdminSenha"
+type="password"
+placeholder="Senha">
+<button
+class="primary"
+onclick="cadastrarAdmin()">
+Cadastrar
+</button>
+<hr>
+<button
+class="primary"
+onclick="abrirListaAdmins()">
+👥 Ver Admins
+</button>
+</div>
+
+<div id="popupListaAdmins" class="popup-admin hidden">
+<span
+class="fechar"
+onclick="fecharListaAdmins()">
+×
+</span>
+<div class="popup-header">
+Lista de Administradores
+</div>
+<table class="tabela-admin">
+<thead>
+<tr>
+<th>ID</th>
+<th>Email</th>
+<th>Ação</th>
+</tr>
+</thead>
+<tbody id="listaAdmins">
+</tbody>
+</table>
+</div>
+<script>
+// ================================
+// CONFIGURAÇÃO DA API
+// ================================
+
+const API =
+    window.location.hostname === "localhost"
+        ? "http://localhost:8000"
+        : "";
+
+
+// Guardar marcas carregadas
+// para usar na tabela de modelos
+let marcasCache = [];
+
+// ================================
+// INICIALIZAÇÃO
+// ================================
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+        carregarPreco();
+        carregarMarcas();
+        carregarModelos();
+        carregarUsuarios();
+        carregarSaldos();
+    }
+);
+
+// ================================
+// CONFIGURAÇÃO - PREÇO DO CÓDIGO
+// ================================
+
+async function carregarPreco(){
+    try{
+        const resposta = await fetch(
+            `${API}/config/`
+        );
+        if(resposta.ok){
+            const dados =
+                await resposta.json();
+            document.getElementById(
+                "preco_codigo"
+            ).value =
+                dados.preco_codigo;
+        }
+    }catch(error){
+        console.error(error);
+    }
+}
+
+async function atualizarPreco(){
+    const preco =
+        document.getElementById(
+            "preco_codigo"
+        ).value;
+    if(!preco){
+        return;
+    }
+    const resposta =
+        await fetch(
+            `${API}/config/`,
+            {
+                method:"PUT",
+                headers:{
+                    "Content-Type":
+                    "application/json"
+                },
+                body:JSON.stringify({
+                    preco_codigo:
+                    Number(preco)
+                })
+            }
+        );
+    if(resposta.ok){
+        // atualizado com sucesso
+    }
+}
+
+// ================================
+// MARCAS
+// ================================
+
+async function carregarMarcas(){
+    const resposta =
+        await fetch(
+            `${API}/marcas/`
+        );
+    const marcas =
+        await resposta.json();
+    // guardar marcas globalmente
+    marcasCache = marcas;
+    const tabela =
+        document.getElementById(
+            "lista_marcas"
+        );
+    tabela.innerHTML="";
+    const select =
+        document.getElementById(
+            "modelo_marca"
+        );
+    select.innerHTML =
+    `
+    <option value="">
+        Selecionar marca
+    </option>
+    `;
+    marcas.forEach(
+        marca => {
+            tabela.innerHTML +=
+            `
+            <tr>
+                <td>
+                    ${marca.id}
+                </td>
+                <td>
+                    ${marca.marca}
+                </td>
+                <td class="actions">
+                    <button
+                    class="edit"
+                    onclick="editarMarca(
+                        ${marca.id},
+                        '${marca.marca}'
+                    )">
+                        Editar
+                    </button>
+                    <button
+                    class="delete"
+                    onclick="apagarMarca(
+                        ${marca.id}
+                    )">
+                        Apagar
+                    </button>
+                </td>
+            </tr>
+            `;
+            select.innerHTML +=
+            `
+            <option value="${marca.id}">
+                ${marca.marca}
+            </option>
+            `;
+        }
+    );
+}
+
+async function salvarMarca(){
+    const id =
+        document.getElementById(
+            "marca_id"
+        ).value;
+    const nome =
+        document.getElementById(
+            "marca_nome"
+        ).value;
+    if(!nome){
+        return;
+    }
+    let url =
+        `${API}/marcas/`;
+    let metodo =
+        "POST";
+    if(id){
+        url =
+        `${API}/marcas/${id}`;
+        metodo =
+        "PUT";
+    }
+    const resposta =
+        await fetch(
+            url,
+            {
+                method:metodo,
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                    marca:nome
+                })
+            }
+        );
+    if(resposta.ok){
+        limparMarca();
+        carregarMarcas();
+    }
+}
+
+function editarMarca(
+    id,
+    nome
+){
+    document.getElementById(
+        "marca_id"
+    ).value=id;
+    document.getElementById(
+        "marca_nome"
+    ).value=nome;
+}
+
+function limparMarca(){
+    document.getElementById(
+        "marca_id"
+    ).value="";
+    document.getElementById(
+        "marca_nome"
+    ).value="";
+}
+
+async function apagarMarca(id){
+    const resposta =
+        await fetch(
+            `${API}/marcas/${id}`,
+            {
+                method:"DELETE"
+            }
+        );
+    if(resposta.ok){
+        carregarMarcas();
+    }
+}
+
+// ================================
+// MODELOS
+// ================================
+
+async function carregarModelos(){
+    const resposta =
+        await fetch(
+            `${API}/modelos/`
+        );
+    const modelos =
+        await resposta.json();
+    const tabela =
+        document.getElementById(
+            "lista_modelos"
+        );
+    tabela.innerHTML="";
+    modelos.forEach(modelo=>{
+        tabela.innerHTML +=
+        `
+        <tr>
+            <td>
+                ${modelo.id}
+            </td>
+            <td>
+                ${buscarNomeMarca(
+                    modelo.marca_id
+                )}
+            </td>
+            <td>
+                ${modelo.modelo}
+            </td>
+            <td>
+                Fórmula ${modelo.formula}
+            </td>
+            <td class="actions">
+                <button
+                    class="edit"
+                    onclick="editarModelo(
+                        ${modelo.id},
+                        '${modelo.modelo}',
+                        ${modelo.formula},
+                        ${modelo.marca_id}
+                    )">
+                    Editar
+                </button>
+                <button
+                    class="delete"
+                    onclick="apagarModelo(
+                        ${modelo.id}
+                    )">
+                    Apagar
+                </button>
+            </td>
+        </tr>
+        `;
+    });
+}
+
+async function salvarModelo(){
+    const id =
+        document.getElementById(
+            "modelo_id"
+        ).value;
+    const nome =
+        document.getElementById(
+            "modelo_nome"
+        ).value;
+    const marca =
+        document.getElementById(
+            "modelo_marca"
+        ).value;
+    const formula =
+        document.getElementById(
+            "modelo_formula"
+        ).value;
+    if(
+        !nome ||
+        !marca ||
+        !formula
+    ){
+        return;
+    }
+    let url =
+        `${API}/modelos/`;
+    let metodo =
+        "POST";
+    if(id){
+        url =
+        `${API}/modelos/${id}`;
+        metodo =
+        "PUT";
+    }
+    const resposta =
+        await fetch(
+            url,
+            {
+                method:metodo,
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                    modelo:nome,
+                    marca_id:Number(marca),
+                    formula:Number(formula)
+                })
+            }
+        );
+    if(resposta.ok){
+        limparModelo();
+        carregarModelos();
+    }
+}
+
+function editarModelo(
+    id,
+    nome,
+    formula,
+    marca_id
+){
+    document.getElementById(
+        "modelo_id"
+    ).value=id;
+    document.getElementById(
+        "modelo_nome"
+    ).value=nome;
+    document.getElementById(
+        "modelo_formula"
+    ).value=formula;
+    document.getElementById(
+        "modelo_marca"
+    ).value=marca_id;
+}
+
+function limparModelo(){
+    document.getElementById(
+        "modelo_id"
+    ).value="";
+    document.getElementById(
+        "modelo_nome"
+    ).value="";
+    document.getElementById(
+        "modelo_marca"
+    ).value="";
+    document.getElementById(
+        "modelo_formula"
+    ).value="";
+}
+
+async function apagarModelo(id){
+    const resposta =
+        await fetch(
+            `${API}/modelos/${id}`,
+            {
+                method:"DELETE"
+            }
+        );
+    if(resposta.ok){
+        carregarModelos();
+    }
+}
+
+// ================================
+// PROCURAR NOME DA MARCA
+// ================================
+function buscarNomeMarca(id){
+    const marca =
+        marcasCache.find(
+            m => m.id == id
+        );
+    if(marca){
+        return marca.marca;
+    }
+    return id;
+}
+
+// ================================
+// USUÁRIOS E SALDOS
+// ================================
+
+// Guardar usuários carregados
+let usuariosCache = [];
+
+// ================================
+// CARREGAR USUÁRIOS
+// ================================
+
+async function carregarUsuarios(){
+    const resposta =
+        await fetch(
+            `${API}/saldos/usuarios`
+        );
+    const usuarios =
+        await resposta.json();
+    usuariosCache = usuarios;
+    const select =
+        document.getElementById(
+            "saldo_usuario"
+        );
+    select.innerHTML =
+    `
+    <option value="">
+        Selecionar usuário
+    </option>
+    `;
+    usuarios.forEach(usuario=>{
+        select.innerHTML +=
+        `
+        <option value="${usuario.id}">
+            ${usuario.email}
+        </option>
+        `;
+    });
+}
+
+// ================================
+// LISTAR SALDOS
+// ================================
+
+async function carregarSaldos(){
+    const resposta =
+        await fetch(
+            `${API}/saldos/`
+        );
+    const saldos =
+        await resposta.json();
+    const tabela =
+        document.getElementById(
+            "lista_saldos"
+        );
+    tabela.innerHTML="";
+    saldos.forEach(saldo=>{
+        tabela.innerHTML +=
+        `
+        <tr>
+            <td>
+                ${saldo.id}
+            </td>
+            <td>
+                ${buscarNomeUsuario(
+                    saldo.usuario_id
+                )}
+            </td>
+            <td>
+                ${saldo.saldo}
+            </td>
+            <td class="actions">
+                <button
+                    class="edit"
+                    onclick="editarSaldo(
+                        ${saldo.usuario_id},
+                        ${saldo.saldo}
+                    )">
+                    Editar
+                </button>
+                <button
+                    class="delete"
+                    onclick="apagarSaldo(
+                        ${saldo.usuario_id}
+                    )">
+                    Apagar
+                </button>
+            </td>
+        </tr>
+        `;
+    });
+}
+
+// ================================
+// CRIAR OU ATUALIZAR SALDO
+// ================================
+
+async function salvarSaldo(){
+    const usuario =
+        document.getElementById(
+            "saldo_usuario"
+        ).value;
+    const valor =
+        document.getElementById(
+            "saldo_valor"
+        ).value;
+    if(!usuario || !valor){
+        return;
+    }
+    // verificar se já existe saldo
+    const consulta =
+        await fetch(
+            `${API}/saldos/${usuario}`
+        );
+    let metodo = "POST";
+    let url = `${API}/saldos/`;
+    if(consulta.ok){
+        metodo = "PUT";
+        url = `${API}/saldos/${usuario}`;
+    }
+    const resposta =
+        await fetch(
+            url,
+            {
+                method: metodo,
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify({
+                    usuario_id: Number(usuario),
+                    saldo: Number(valor)
+                })
+            }
+        );
+    if(resposta.ok){
+        document.getElementById(
+            "saldo_usuario"
+        ).value = "";
+        document.getElementById(
+            "saldo_valor"
+        ).value = "";
+        carregarSaldos();
+    }
+}
+
+function editarSaldo(
+    usuario,
+    saldo
+){
+    document.getElementById(
+        "saldo_usuario"
+    ).value=usuario;
+    document.getElementById(
+        "saldo_valor"
+    ).value=saldo;
+}
+
+async function apagarSaldo(usuario){
+    const resposta =
+        await fetch(
+            `${API}/saldos/${usuario}`,
+            {
+                method:"DELETE"
+            }
+        );
+    if(resposta.ok){
+        carregarSaldos();
+
+    }
+}
+
+// ================================
+// PROCURAR EMAIL DO USUÁRIO
+// ================================
+
+function buscarNomeUsuario(id){
+    const usuario =
+        usuariosCache.find(
+            u => u.id == id
+        );
+    if(usuario){
+        return usuario.email;
+    }
+    return id;
+}
+
+// ================= GERENCIAR ADMINS =================
+function abrirGerenciarAdmin(){
+document
+.getElementById("popupGerenciarAdmin")
+.classList.remove("hidden");
+}
+
+function fecharGerenciarAdmin(){
+document
+.getElementById("popupGerenciarAdmin")
+.classList.add("hidden");
+}
+
+async function cadastrarAdmin(){
+    let dados = {
+        email: document.getElementById(
+            "novoAdminEmail"
+        ).value,
+        senha: document.getElementById(
+            "novoAdminSenha"
+        ).value
+    };
+    console.log(dados);
+    try{
+        let resposta = await fetch(
+            `${API}/admins/`,
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(dados)
+            }
+        );
+        let retorno = await resposta.json();
+        if(resposta.ok){
+            console.log(
+                "Administrador cadastrado com sucesso"
+            );
+            document.getElementById(
+                "novoAdminEmail"
+            ).value="";
+            document.getElementById(
+                "novoAdminSenha"
+            ).value="";
+            fecharGerenciarAdmin();
+        }else{
+            console.log(
+                retorno.detail ||
+                "Erro ao cadastrar admin"
+            );
+        }
+    }catch(error){
+        console.error(error);
+    }
+}
+
+// APAGAR ADMIN
+async function apagarAdmin(){
+    let id = document.getElementById(
+        "idAdminApagar"
+    ).value;
+    if(!id){
+        console.log(
+            "Digite o ID do admin"
+        );
+        return;
+    }
+    try{
+        let resposta = await fetch(
+            `${API}/admins/${id}`,
+            {
+                method:"DELETE"
+            }
+        );
+        let retorno = await resposta.json();
+        if(resposta.ok){
+            console.log(
+                "Administrador apagado com sucesso"
+            );
+            document.getElementById(
+                "idAdminApagar"
+            ).value="";
+        }else{
+            console.log(
+                retorno.detail ||
+                "Erro ao apagar admin"
+            );
+        }
+    }catch(error){
+        console.error(error);
+    }
+}
+
+function abrirListaAdmins(){
+document
+.getElementById(
+"popupListaAdmins"
+)
+.classList.remove("hidden");
+carregarAdmins();
+}
+function fecharListaAdmins(){
+document
+.getElementById(
+"popupListaAdmins"
+)
+.classList.add("hidden");
+}
+
+async function carregarAdmins(){
+try{
+let resposta = await fetch(
+`${API}/admins/`
+);
+let admins =
+await resposta.json();
+let tabela =
+document.getElementById(
+"listaAdmins"
+);
+tabela.innerHTML="";
+admins.forEach(admin=>{
+tabela.innerHTML += `
+<tr>
+<td>
+${admin.id}
+</td>
+<td>
+${admin.email}
+</td>
+<td>
+<button
+onclick="apagarAdminLista(${admin.id})">
+Apagar
+</button>
+</td>
+</tr>
+`;
+});
+}catch(e){
+console.error(e);
+}
+}
+
+async function apagarAdminLista(id){
+let resposta =
+await fetch(
+`${API}/admins/${id}`,
+{
+method:"DELETE"
+}
+);
+if(resposta.ok){
+carregarAdmins();
+}
+}
+
+// ===============================
+// ARRASTAR POPUPS
+// ===============================
+
+
+function tornarArrastavel(popup){
+
+
+let header =
+popup.querySelector(
+".popup-header"
+);
+
+
+let posX = 0;
+let posY = 0;
+let mouseX = 0;
+let mouseY = 0;
+
+
+
+header.onmousedown = function(e){
+
+
+e.preventDefault();
+
+
+
+mouseX = e.clientX;
+
+mouseY = e.clientY;
+
+
+
+document.onmousemove =
+function(e){
+
+
+
+e.preventDefault();
+
+
+
+posX =
+mouseX - e.clientX;
+
+
+posY =
+mouseY - e.clientY;
+
+
+
+mouseX =
+e.clientX;
+
+
+mouseY =
+e.clientY;
+
+
+
+popup.style.top =
+(
+popup.offsetTop - posY
+)
++
+"px";
+
+
+
+popup.style.left =
+(
+popup.offsetLeft - posX
+)
++
+"px";
+
+
+
+};
+
+
+
+document.onmouseup =
+function(){
+
+
+document.onmousemove=null;
+
+document.onmouseup=null;
+
+
+};
+
+
+
+};
+
+
+
+}
+
+
+
+// ativar nos dois popups
+
+tornarArrastavel(
+document.getElementById(
+"popupGerenciarAdmin"
+)
+);
+
+
+tornarArrastavel(
+document.getElementById(
+"popupListaAdmins"
+)
+);
+</script>
+</body>
+</html>
