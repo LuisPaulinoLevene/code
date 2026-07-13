@@ -752,7 +752,15 @@ text-align:center;
 color:#1e3a8a;
 
 }
+#precoTopo{
 
+color:#22c55e;
+
+font-size:18px;
+
+font-weight:bold;
+
+}
 </style>
 <header>
 
@@ -761,7 +769,9 @@ color:#1e3a8a;
 Network Unlock by IMEI
 </div>
 
-
+<div id="precoTopo">
+💵 Código: <b id="precoCodigo">0</b> MT
+</div>
 
 <div id="menuLogin">
 
@@ -2161,13 +2171,42 @@ retorno.detail ||
 mensagem(
 "Erro de ligação ao servidor"
 );
+}
+}
+
+// ================= PREÇO DO CÓDIGO =================
+
+async function carregarPreco(){
+
+try{
+
+let resposta = await fetch(
+`${API}/config/`
+);
+
+
+if(resposta.ok){
+
+let dados = await resposta.json();
+
+
+document.getElementById(
+"precoCodigo"
+).innerHTML =
+dados.preco_codigo;
 
 
 }
 
 
-}
+}catch(e){
 
+console.log(
+"Erro ao carregar preço",
+e
+);
+}
+}
 
 // ================= ANO =================
 
@@ -2180,18 +2219,10 @@ if(ano)
 ano.innerHTML=
 new Date().getFullYear();
 
-
-
-
-
-
-
 // ================= INICIO =================
-
-
 carregarMarcas();
-
 verificarLogin();
+carregarPreco();
 </script>
 </body>
 
