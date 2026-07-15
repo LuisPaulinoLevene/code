@@ -1344,6 +1344,10 @@ document.getElementById(
 "popupListaAdmins"
 )
 );
+
+window.addEventListener("beforeunload", () => {
+    navigator.sendBeacon(`${API}/admins/logout`);
+});
 </script>
 </body>
 </html>

@@ -65,19 +65,14 @@ def login_admin(
 # LOGOUT ADMIN
 # ==========================
 
-@router.get("/logout")
-def logout_admin(
-    request: Request
-):
+@router.post("/logout")
+def logout_admin(request: Request):
 
     request.session.clear()
 
-
     return {
-        "message":
-        "Logout realizado"
+        "message": "Logout realizado"
     }
-
 
 
 

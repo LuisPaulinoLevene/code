@@ -1,15 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-
 <title>Network Unlock by IMEI</title>
-
 </head>
-
 <body>
 
 <style>
@@ -17,2157 +12,1000 @@
 box-sizing:border-box;
 font-family:Arial,Helvetica,sans-serif;
 }
-
-
 body{
-
 margin:0;
-
 background:#f1f5f9;
-
 color:#111827;
-
 }
 
-
-
 /* ================= HEADER ================= */
-
-
 header{
-
 background:linear-gradient(
 135deg,
 #111827,
 #1e3a8a
 );
-
 color:white;
-
 padding:18px 30px;
-
 display:flex;
-
 justify-content:space-between;
-
 align-items:center;
-
 position:relative;
-
 box-shadow:0 5px 15px #0004;
-
 }
-
-
-
 .logo{
-
 font-size:24px;
-
 font-weight:bold;
-
 }
-
-
-
 /* MENUS */
-
-
 #menuLogin,
 #menuUsuario{
-
 display:flex;
-
 align-items:center;
-
 gap:12px;
-
 }
-
-
-
 #emailTopo{
-
 font-weight:bold;
-
 color:#93c5fd;
-
 }
-
-
-
 #saldoTopo{
-
 color:#22c55e;
-
 font-size:18px;
-
 }
-
-
-
-
-
 button{
-
 background:#2563eb;
-
 color:white;
-
 border:0;
-
 padding:10px 16px;
-
 border-radius:10px;
-
 cursor:pointer;
-
 font-weight:bold;
-
 transition:.3s;
-
 }
-
-
-
 button:hover{
-
 transform:translateY(-2px);
-
 opacity:.9;
-
 }
-
-
-
 .hidden{
-
 display:none!important;
-
 }
-
-
 
 /* ================= CONTAINER ================= */
-
-
 main{
-
 width:90%;
-
 max-width:700px;
-
 margin:35px auto;
-
 }
-
-
 
 /* ================= CARD CALCULO ================= */
-
-
 .card{
-
 background:white;
-
 padding:30px;
-
 border-radius:20px;
-
 box-shadow:0 8px 25px #0002;
-
 }
-
-
-
 .card h2{
-
 text-align:center;
-
 color:#1e3a8a;
-
 margin-top:0;
-
 }
-
-
-
 label{
-
 font-weight:bold;
-
 display:block;
-
 margin-top:10px;
-
 }
-
-
-
 input,
 select{
-
 width:100%;
-
 padding:14px;
-
 margin-top:8px;
-
 margin-bottom:18px;
-
 border:1px solid #cbd5e1;
-
 border-radius:10px;
-
 font-size:15px;
-
 }
-
-
-
 input:focus,
 select:focus{
-
 outline:none;
-
 border-color:#2563eb;
-
 }
-
-
-
 /* BOTAO PRINCIPAL */
-
-
 .primary{
-
 width:100%;
-
 background:#2563eb;
-
 padding:15px;
-
 font-size:16px;
-
 }
-
-
-
 .green{
-
 background:#16a34a;
-
 }
-
-
-
-
 
 /* ================= MODAIS ================= */
-
-
 .modal{
-
 position:absolute;
-
 top:75px;
-
 right:25px;
-
 width:300px;
-
 background:white;
-
 color:#111827;
-
 padding:25px;
-
 border-radius:18px;
-
 box-shadow:0 10px 30px #0005;
-
 z-index:1000;
-
 }
-
-
-
 .modal h3{
-
 text-align:center;
-
 }
-
-
-
 .fechar{
-
 float:right;
-
 font-size:22px;
-
 color:red;
-
 cursor:pointer;
-
 }
-
-
-
-
 
 /* ================= MENSAGEM ================= */
-
-
 .message{
-
 background:#dbeafe;
-
 color:#1e3a8a;
-
 padding:15px;
-
 border-radius:12px;
-
 margin-bottom:20px;
-
 }
 
-
-
 /* ================= RESULTADO ================= */
-
-
 .resultado-area{
-
 margin-top:30px;
-
 background:
-
 linear-gradient(
 135deg,
 #0f172a,
 #2563eb
 );
-
 padding:35px;
-
 border-radius:22px;
-
 text-align:center;
-
 color:white;
-
 box-shadow:0 10px 30px #0004;
-
 }
-
-
-
 .resultado-area h2{
-
 color:#bfdbfe;
-
 margin-top:0;
-
 }
-
-
-
 .codigo-final{
-
 background:white;
-
 color:#16a34a;
-
 font-size:42px;
-
 font-weight:bold;
-
 letter-spacing:8px;
-
 padding:25px;
-
 border-radius:15px;
-
 margin:25px auto;
-
 max-width:450px;
-
 border:3px solid #22c55e;
-
 box-shadow:0 5px 20px #0004;
-
 }
-
-
-
 .saldo-final{
-
 font-size:20px;
-
 color:#fde047;
-
 font-weight:bold;
-
 }
-
-
 
 /* ================= SUPORTE ================= */
-
-
 #btnSuporte{
-
 position:fixed;
-
 right:25px;
-
 bottom:70px;
-
 width:60px;
-
 height:60px;
-
 border-radius:50%;
-
 background:#16a34a;
-
 font-size:28px;
-
 box-shadow:0 8px 20px #0005;
-
 z-index:2000;
-
 }
-
-
-
 .suporte{
-
 position:fixed;
-
 right:25px;
-
 bottom:145px;
-
 width:270px;
-
 background:white;
-
 padding:20px;
-
 border-radius:18px;
-
 box-shadow:0 10px 35px #0005;
-
 z-index:2000;
-
 }
-
-
-
 .suporte h3{
-
 color:#2563eb;
-
 text-align:center;
-
 }
-
-
-
 .suporte a{
-
 display:block;
-
 background:#16a34a;
-
 color:white;
-
 padding:12px;
-
 border-radius:10px;
-
 text-decoration:none;
-
 text-align:center;
-
 margin-top:15px;
-
 }
-
-
-
 /* ================= FOOTER ================= */
-
-
 footer{
-
 position:fixed;
-
 right:20px;
-
 bottom:15px;
-
 background:#111827;
-
 color:white;
-
 padding:8px 15px;
-
 border-radius:10px;
-
 font-size:13px;
-
 }
-
-
 
 /* ================= RESPONSIVO ================= */
-
-
 @media(max-width:650px){
-
-
 header{
-
 flex-direction:column;
-
 gap:15px;
-
 }
-
-
-
 #menuLogin,
 #menuUsuario{
-
 flex-wrap:wrap;
-
 justify-content:center;
-
 }
-
-
-
 .logo{
-
 font-size:20px;
-
 }
-
-
-
 .codigo-final{
-
 font-size:28px;
-
 letter-spacing:4px;
-
 }
-
-
-
 footer{
-
 font-size:11px;
-
 right:10px;
-
 }
-
-
 }
 
 /* ================= POPUP RESULTADO ================= */
-
-
 .popup-resultado{
-
 position:fixed;
-
 top:90px;
-
 right:25px;
-
 width:280px;
-
 background:white;
-
 padding:25px;
-
 border-radius:18px;
-
 box-shadow:0 10px 35px #0005;
-
 z-index:3000;
-
 animation:entrada .3s ease;
-
 text-align:center;
-
 border-left:6px solid #16a34a;
-
 }
-
-
 .popup-resultado h3{
-
 margin-top:0;
-
 color:#1e3a8a;
-
 }
-
-
-
 .codigo-popup{
-
 font-size:35px;
-
 font-weight:bold;
-
 letter-spacing:6px;
-
 color:#16a34a;
-
 }
-
-
-
 #codigoPopup{
-
 font-size:40px;
-
 font-weight:bold;
-
 letter-spacing:8px;
-
 color:#16a34a;
-
 padding:15px;
-
 background:#f0fdf4;
-
 border-radius:12px;
-
 }
-
-
-
 @keyframes entrada{
-
 from{
-
 transform:translateX(100px);
-
 opacity:0;
-
 }
-
 to{
-
 transform:translateX(0);
-
 opacity:1;
-
 }
-
 }
-
-
-
 @media(max-width:650px){
-
 .popup-resultado{
-
 right:10px;
-
 left:10px;
-
 width:auto;
-
 }
-
 }
 
 /* ================= ADMIN ================= */
-
-
 #btnAdmin{
-
 position:fixed;
-
 left:25px;
-
 bottom:25px;
-
 width:60px;
-
 height:60px;
-
 border-radius:50%;
-
 background:#111827;
-
 font-size:28px;
-
 box-shadow:0 8px 20px #0005;
-
 z-index:3000;
-
 }
-
-
-
 .popup-admin{
-
 position:fixed;
-
 left:25px;
-
 bottom:100px;
-
 width:280px;
-
 background:white;
-
 padding:25px;
-
 border-radius:18px;
-
 box-shadow:0 10px 35px #0005;
-
 z-index:3000;
-
 }
-
-
-
 .popup-admin h3{
-
 text-align:center;
-
 color:#1e3a8a;
-
 }
 #precoTopo{
-
 color:#22c55e;
-
 font-size:18px;
-
 font-weight:bold;
-
 }
 </style>
 <header>
-
-
 <div class="logo">
 Network Unlock by IMEI
 </div>
-
 <div id="precoTopo">
-💵 Código: <b id="precoCodigo">0</b> MT
+💵 Preço por código: <b id="precoCodigo">0</b> MT
 </div>
-
 <div id="menuLogin">
-
-
 <button onclick="abrirCadastro()">
 👤 Signup
 </button>
-
-
 <button onclick="abrirLogin()">
 🔑 Login
 </button>
-
-
 </div>
-
-
-
-
-
 <div id="menuUsuario" class="hidden">
-
-
 <span id="emailTopo"></span>
-
-
 <span>
-💰 <b id="saldoTopo">0</b> MT
+💰 Saldo actual: <b id="saldoTopo">0</b> MT
 </span>
-
-
-
 <button onclick="abrirDeposito()">
 💳 Depositar
 </button>
-
-
 <button onclick="sair()">
 🚪 Sair
 </button>
-
-
 </div>
-
-
 </header>
-
-
-
-
-
-
-
 <!-- MODAL CADASTRO -->
-
-
 <div id="modalCadastro" class="modal hidden">
-
-
 <span class="fechar" onclick="fecharModais()">
 ×
 </span>
-
-
 <h3>
 Cadastrar
 </h3>
-
-
 <input
 id="cadEmail"
 placeholder="Email">
-
-
-
 <input
 id="cadSenha"
 type="password"
 placeholder="Senha">
-
-
-
 <button class="primary" onclick="cadastrar()">
-
 Cadastrar
-
 </button>
-
-
 </div>
 
-
-
-
-
-
-
 <!-- MODAL LOGIN -->
-
-
 <div id="modalLogin" class="modal hidden">
-
-
 <span class="fechar" onclick="fecharModais()">
 ×
 </span>
-
-
 <h3>
 Login
 </h3>
-
-
-
 <input
 id="logEmail"
 placeholder="Email">
-
-
-
 <input
 id="logSenha"
 type="password"
 placeholder="Senha">
-
-
-
 <button class="primary" onclick="login()">
-
 Entrar
-
 </button>
-
-
 </div>
 
-
-
-
-
-
-
-
-
 <!-- MODAL DEPOSITO -->
-
-
 <div id="modalDeposito" class="modal hidden">
-
-
 <span class="fechar" onclick="fecharModais()">
-
 ×
-
 </span>
-
-
-
 <h3>
 Depositar saldo
 </h3>
-
-
-
 <select id="metodo">
-
-
 <option value="emola">
 eMola
 </option>
-
-
 <option value="mpesa">
 M-Pesa
 </option>
-
-
 </select>
-
-
-
-
 <input
 id="numero"
 placeholder="Número">
-
-
 <input
 id="valor"
 type="number"
 placeholder="Valor">
 
-
-
 <button
 class="primary green"
 onclick="recarregar()">
-
 Confirmar
-
 </button>
-
-
 </div>
-
-
-
-
-
-
-
-
-
-
 <main>
-
-
 <div id="msg"></div>
 
-
-
-
-
 <!-- AREA CALCULO -->
-
-
 <div class="card">
-
-
 <h2>
 Calcular Código
 </h2>
-
-
-
-
 <label>
 Marca
 </label>
-
-
 <select id="marca">
-
 <option>
 Selecione marca
 </option>
-
 </select>
-
-
-
-
-
-
 <label>
 Modelo
 </label>
-
-
 <select id="modelo">
-
 <option>
 Selecione modelo
 </option>
-
 </select>
-
-
-
-
-
-
 <label>
 IMEI
 </label>
-
-
 <input
 id="imei"
 maxlength="15"
-placeholder="Digite IMEI com 15 números">
-
-
-
-
-
-
+placeholder="Digite IMEI com 15 dígitos">
 <button
 class="primary"
 onclick="calcular()">
-
 Calcular Código
-
 </button>
-
-
 </div>
 
 <!-- POPUP RESULTADO -->
 <div id="popupResultado" class="popup-resultado hidden">
-
 <span onclick="fecharResultado()" class="fechar">
 ×
 </span>
-
 <h3>
 O teu código é:
 </h3>
-
 <div id="codigoPopup"></div>
-
 </div>
 </main>
 
-
-
-
-
-
-
-
-
 <!-- BOTAO SUPORTE -->
-
-
 <button
 id="btnSuporte"
 onclick="abrirSuporte()">
-
 💬
-
 </button>
 
-
-
-
-
-
-
-
 <!-- JANELA SUPORTE -->
-
-
 <div id="modalSuporte" class="suporte hidden">
-
-
 <span
 class="fechar"
 onclick="fecharSuporte()">
-
 ×
-
 </span>
-
-
-
 <h3>
 Suporte
 </h3>
-
-
-
 <p>
-
 <b>
 Luís Paulino Levene Máquina
 </b>
-
 </p>
-
-
-
-
 <p>
-
 Contactos:
-
 <br>
-
 863614176
-
 <br>
-
 850320411
-
 </p>
-
-
-
-
-
 <a
 href="https://wa.me/258863614176"
 target="_blank">
-
 📱 Falar no WhatsApp
-
 </a>
-
 </div>
 
-
 <!-- BOTÃO ADMIN -->
-
 <button
 id="btnAdmin"
 onclick="abrirAdmin()">
-
 🔐
-
 </button>
 
-
-
 <!-- POPUP LOGIN ADMIN -->
-
 <div id="popupAdmin" class="popup-admin hidden">
-
-
 <span
 class="fechar"
 onclick="fecharAdmin()">
-
 ×
 </span>
-
-
 <h3>
 Admin
 </h3>
-
-
-
 <input
 id="adminEmail"
 placeholder="Email">
-
-
-
 <input
 id="adminSenha"
 type="password"
 placeholder="Senha">
-
-
-
 <button
 class="primary"
 onclick="loginAdmin()">
-
 Entrar
-
 </button>
-
 </div>
 <!-- RODAPE -->
-
-
 <footer>
-
 © <span id="ano"></span>
-
 ProemPy Services.
-
 Todos direitos reservados.
-
 </footer>
+
 
 <script>
 const API =
     window.location.hostname === "localhost"
         ? "http://localhost:8000"
         : "";
-
 let usuario=null;
 
-
 // ================= MENSAGEM =================
-
 function mensagem(texto){
-
 let box=document.getElementById("msg");
-
 if(box)
-
 box.innerHTML=`
 <div class="message">
 ${texto}
 </div>`;
-
 }
 
-
-
 // ================= MODAIS =================
-
 function abrirCadastro(){
-
 fecharModais();
-
 document
 .getElementById("modalCadastro")
 ?.classList.remove("hidden");
-
 }
-
-
-
 function abrirLogin(){
-
 fecharModais();
-
 document
 .getElementById("modalLogin")
 ?.classList.remove("hidden");
-
 }
-
-
-
 function abrirDeposito(){
-
 fecharModais();
-
 document
 .getElementById("modalDeposito")
 ?.classList.remove("hidden");
-
 }
-
-
-
 function fecharModais(){
-
 [
 "modalCadastro",
 "modalLogin",
 "modalDeposito"
 ].forEach(id=>{
-
 document
 .getElementById(id)
 ?.classList.add("hidden");
-
 });
-
 }
 
-
-
 // ================= SUPORTE =================
-
-
 function abrirSuporte(){
-
 document
 .getElementById("modalSuporte")
 ?.classList.remove("hidden");
-
 }
-
-
-
 function fecharSuporte(){
-
 document
 .getElementById("modalSuporte")
 ?.classList.add("hidden");
-
 }
 
-
-
 // ================= CADASTRO =================
-
-
 async function cadastrar(){
-
 let dados={
-
 email:cadEmail.value,
-
 senha:cadSenha.value
-
 };
-
-
 try{
-
-
 let resposta=await fetch(
 `${API}/usuarios/`,
 {
-
 method:"POST",
-
 headers:{
 "Content-Type":"application/json"
 },
-
 body:JSON.stringify(dados)
-
 });
-
-
 let retorno=await resposta.json();
-
-
 if(resposta.ok){
-
 mensagem(
 "Cadastro realizado. Faça login."
 );
-
 fecharModais();
-
 }
-
 else{
-
 mensagem(
 retorno.detail || "Erro no cadastro"
 );
-
 }
-
-
 }catch(e){
-
 mensagem(
 "Servidor indisponível"
 );
-
 }
-
-
 }
-
-
 
 // ================= LOGIN =================
-
-
 async function login(){
-
-
 let dados={
-
 email:logEmail.value,
-
 senha:logSenha.value
-
 };
-
-
 try{
-
-
 let resposta=await fetch(
 `${API}/usuarios/login`,
 {
-
 method:"POST",
-
 headers:{
 "Content-Type":"application/json"
 },
-
 body:JSON.stringify(dados)
-
 });
-
-
 let retorno=await resposta.json();
-
-
-
 if(!resposta.ok){
-
 mensagem(
 retorno.detail ||
 "Erro no login"
 );
-
 return;
-
 }
-
-
-
 usuario=retorno;
-
-
 localStorage.setItem(
 "usuario_id",
 usuario.id
 );
-
-
-
 mostrarMenuUsuario();
-
-
 mensagem(
 "Login efetuado com sucesso"
 );
-
-
 fecharModais();
-
-
-
 }catch(e){
-
 mensagem(
 "Erro de ligação ao servidor"
 );
-
 }
-
-
 }
-
-
-
-
 
 // ================= MENU USUARIO =================
-
-
 function mostrarMenuUsuario(){
-
-
 menuLogin.classList.add("hidden");
-
-
 menuUsuario.classList.remove("hidden");
-
-
-
 emailTopo.innerHTML=
 "👤 "+usuario.email;
-
-
-
 buscarSaldo();
-
-
 }
 
-
-
 // ================= SAIR =================
-
-
 function sair(){
-
 localStorage.removeItem(
 "usuario_id"
 );
-
-
 location.reload();
-
 }
 
-
-
 // ================= SALDO =================
-
-
 async function buscarSaldo(){
-
-
 let id=
 localStorage.getItem("usuario_id");
-
-
 if(!id)return;
-
-
-
 try{
-
-
 let resposta=await fetch(
 `${API}/calcular/saldo/${id}`
 );
-
-
-
 let dados=await resposta.json();
-
-
-
 if(resposta.ok){
-
-
 let saldo=document.getElementById(
 "saldoTopo"
 );
-
-
 if(saldo)
-
 saldo.innerHTML=dados.saldo;
-
-
 }
-
-
-
 }catch(e){
-
 console.log(e);
-
 }
-
-
 }
-
-
-
-
 
 // ================= MARCAS =================
-
-
 async function carregarMarcas(){
-
-
-try{
-
-
-let resposta=await fetch(
-`${API}/calcular/marcas`
-);
-
-
-
-let marcas=await resposta.json();
-
-
-
-let select=document.getElementById(
-"marca"
-);
-
-
-
-select.innerHTML=`
-
-<option value="">
-Selecione marca
-</option>
-
-`;
-
-
-
-marcas.forEach(m=>{
-
-
-select.innerHTML+=`
-
-<option value="${m.id}">
-${m.marca}
-</option>
-
-`;
-
-
-});
-
-
-
-}catch(e){
-
-
-mensagem(
-"Erro ao carregar marcas"
-);
-
-
+    aguarde("Aguarde...");
+    for(let tentativa=1; tentativa<=5; tentativa++){
+        try{
+            let resposta = await fetch(`${API}/calcular/marcas`);
+            if(!resposta.ok)
+                throw new Error();
+            let marcas = await resposta.json();
+            let select = document.getElementById("marca");
+            select.innerHTML = `
+            <option value="">
+                Selecione marca
+            </option>`;
+            marcas.forEach(m=>{
+                select.innerHTML += `
+                <option value="${m.id}">
+                    ${m.marca}
+                </option>`;
+            });
+            limparMensagem();
+            return;
+        }catch(e){
+            if(tentativa < 5){
+                aguarde(`Aguarde (${tentativa}/5)`);
+                await esperar(2000);
+            }else{
+                mensagem("Não foi possível carregar as marcas, actualiza a página.");
+            }
+        }
+    }
 }
-
-
-}
-
-
-
-
 
 // ================= MODELOS =================
-
-
 document
 .getElementById("marca")
 .addEventListener(
 "change",
 async function(){
-
-
 let id=this.value;
-
-
 if(!id)return;
-
-
-
 try{
-
-
 let resposta=await fetch(
 `${API}/calcular/modelos/${id}`
 );
-
-
-
 let modelos=await resposta.json();
-
-
-
 modelo.innerHTML=`
-
 <option value="">
 Selecione modelo
 </option>
-
 `;
-
-
-
 modelos.forEach(m=>{
-
-
 modelo.innerHTML+=`
-
 <option value="${m.id}">
 ${m.modelo}
 </option>
-
 `;
-
-
 });
-
-
-
 }catch(e){
-
 mensagem(
 "Erro ao carregar modelos"
 );
-
 }
-
-
 });
 
-
-
-
-
-
-
 // ================= CALCULAR =================
-
-
 async function calcular(){
-
-
 let id=
 localStorage.getItem("usuario_id");
-
-
-
 if(!id){
-
 mensagem(
 "Faça login primeiro."
 );
-
 return;
-
 }
-
-
-
-
 let dados={
-
 usuario_id:Number(id),
-
 imei:
 imei.value.trim(),
-
 marca_id:Number(
 marca.value
 ),
-
 modelo_id:Number(
 modelo.value
 )
-
 };
-
-
-
-
 if(dados.imei.length!==15){
-
 mensagem(
-"IMEI deve ter 15 números."
+"IMEI deve ter 15 dígitos."
 );
-
 return;
-
 }
-
-
-
 try{
-
-
 let resposta=await fetch(
 `${API}/calcular/`,
 {
-
 method:"POST",
-
 headers:{
 "Content-Type":"application/json"
 },
-
 body:
 JSON.stringify(dados)
-
 });
-
-
-
 let retorno=await resposta.json();
-
-
-
 if(resposta.ok){
-
-
 mostrarResultado(
 retorno.codigo
 );
-
-
-
 buscarSaldo();
-
-
 }
-
 else{
-
-
 mensagem(
 retorno.detail ||
 "Erro ao calcular"
 );
-
-
 }
-
-
-
 }catch(e){
-
-
 mensagem(
 "Erro no servidor"
 );
-
-
 }
-
-
-
 }
-
-
-
-
 
 // ================= DEPOSITO =================
-
-
 async function recarregar(){
-
-
-
 let id=
 localStorage.getItem("usuario_id");
-
-
-
 if(!id){
-
 mensagem(
 "Faça login primeiro."
 );
-
 return;
-
 }
-
-
-
-
 let dados={
-
-
 usuario_id:Number(id),
-
-
 valor:Number(
 valor.value
 ),
-
-
 numero:
 numero.value,
-
-
 metodo:
 metodo.value
-
-
 };
-
-
-
-
 if(!dados.valor){
-
 mensagem(
 "Digite o valor."
 );
-
 return;
-
 }
-
-
-
 try{
-
-
 let resposta=await fetch(
 `${API}/calcular/recarga`,
 {
-
 method:"POST",
-
 headers:{
 "Content-Type":"application/json"
 },
-
 body:
 JSON.stringify(dados)
-
 });
-
-
-
 let retorno=await resposta.json();
-
-
-
 if(resposta.ok){
-
-
 mensagem(
 "Depósito confirmado."
 );
-
-
-
 buscarSaldo();
-
-
 fecharModais();
-
-
 }
-
 else{
-
-
 mensagem(
 retorno.detail ||
 "Erro no depósito"
 );
-
-
 }
-
-
-
 }catch(e){
-
-
 mensagem(
 "Erro de ligação."
 );
-
-
 }
-
-
-
 }
-
-
-
-
-
-
 
 // ================= RECUPERAR LOGIN =================
-
-
 async function verificarLogin(){
-
-
 let id=
 localStorage.getItem("usuario_id");
-
-
-
 if(!id)return;
-
-
-
 try{
-
-
 let resposta=await fetch(
 `${API}/usuarios/${id}`
 );
-
-
-
 if(resposta.ok){
-
-
 usuario=
 await resposta.json();
-
-
-
 mostrarMenuUsuario();
-
-
 }
-
-
-
 }catch(e){
-
 console.log(e);
-
 }
-
-
 }
-
-
 function mostrarResultado(codigo){
-
 let popup=document.getElementById(
 "popupResultado"
 );
-
-
 let campo=document.getElementById(
 "codigoPopup"
 );
-
-
 campo.innerHTML=codigo;
-
-
 popup.classList.remove(
 "hidden"
 );
-
 }
-
-
-
 function fecharResultado(){
-
 document
 .getElementById("popupResultado")
 .classList.add("hidden");
-
 }
 
 // ================= ADMIN LOGIN =================
-
-
 function abrirAdmin(){
-
 document
 .getElementById("popupAdmin")
 .classList.remove("hidden");
-
 }
-
-
-
 function fecharAdmin(){
-
 document
 .getElementById("popupAdmin")
 .classList.add("hidden");
-
 }
-
-
-
-
 async function loginAdmin(){
-
-
 let dados={
-
 email:
 adminEmail.value,
-
 senha:
 adminSenha.value
-
 };
-
-
-
 try{
-
-
 let resposta = await fetch(
 `${API}/admins/login`,
 {
-
 method:"POST",
-
 headers:{
 "Content-Type":"application/json"
 },
-
 body:
 JSON.stringify(dados)
-
 }
-
 );
-
-
-
 let retorno =
 await resposta.json();
-
-
-
 if(resposta.ok){
-
-
 window.location.href="/x/";
-
-
 }
-
 else{
-
-
 mensagem(
 retorno.detail ||
 "Dados inválidos"
 );
-
-
 }
-
-
-
 }catch(e){
-
-
 mensagem(
 "Erro de ligação ao servidor"
 );
@@ -2175,56 +1013,58 @@ mensagem(
 }
 
 // ================= PREÇO DO CÓDIGO =================
-
 async function carregarPreco(){
-
-try{
-
-let resposta = await fetch(
-`${API}/config/`
-);
-
-
-if(resposta.ok){
-
-let dados = await resposta.json();
-
-
-document.getElementById(
-"precoCodigo"
-).innerHTML =
-dados.preco_codigo;
-
-
+    for(let tentativa=1; tentativa<=5; tentativa++){
+        try{
+            let resposta = await fetch(`${API}/config/`);
+            if(!resposta.ok)
+                throw new Error();
+            let dados = await resposta.json();
+            document.getElementById("precoCodigo").innerHTML =
+            dados.preco_codigo;
+            return;
+        }catch(e){
+            if(tentativa < 5){
+                document.getElementById("precoCodigo").innerHTML =
+                "Aguarde...";
+                await esperar(2000);
+            }else{
+                document.getElementById("precoCodigo").innerHTML =
+                "--";
+            }
+        }
+    }
 }
-
-
-}catch(e){
-
-console.log(
-"Erro ao carregar preço",
-e
-);
+function aguarde(texto = "Aguarde..."){
+    let box = document.getElementById("msg");
+    if(box){
+        box.innerHTML = `
+        <div class="message">
+            ⏳ ${texto}
+        </div>`;
+    }
 }
+function limparMensagem(){
+    let box = document.getElementById("msg");
+    if(box) box.innerHTML = "";
+}
+function esperar(ms){
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 // ================= ANO =================
-
-
 let ano=document.getElementById("ano");
-
-
 if(ano)
-
 ano.innerHTML=
 new Date().getFullYear();
 
 // ================= INICIO =================
-carregarMarcas();
-verificarLogin();
-carregarPreco();
+(async ()=>{
+    aguarde("Aguarde...");
+    await carregarPreco();
+    await carregarMarcas();
+    await verificarLogin();
+})();
 </script>
 </body>
-
-
 </html>
